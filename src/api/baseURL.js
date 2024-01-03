@@ -1,7 +1,7 @@
 import axios from "axios";
 import { store } from "../store/store";
 
-const axiosBaseUrl = "https://travel-s-notes.onrender.com";
+const axiosBaseUrl = "https://user-notes-backend.vercel.app";
 axios.defaults.baseURL = axiosBaseUrl; 
 
 axios.interceptors.request.use(
