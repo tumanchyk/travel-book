@@ -1,21 +1,18 @@
 import styled from "@emotion/styled";
 
 export const ListEl = styled.ul`
-background: rgba(255, 255, 255, 0.3)
+display: grid;
+flex-wrap: wrap;
+grid-template-columns: repeat(1, 1fr);
+gap: 26px;
+@media (min-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 830px) {
+    grid-template-columns: repeat(3, minmax(30%, 1fr));
+}
+`
 
-`
-export const HeadList = styled.ul`
-display: flex;
-align-items: center;
-padding: 20px 110px 20px 20px;
-border-bottom: 1px solid #000;
-background: rgba(255, 255, 255, 0.3)
-`
-export const HeadItem = styled.li`
-font-weight: 600;
-font-size: 18px;
-width : ${props => props.width};
-`
 export const NoItems = styled.p`
 text-align: center;
 font-weight: 600;

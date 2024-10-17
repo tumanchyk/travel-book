@@ -1,5 +1,6 @@
-import axios from '../../api/baseURL';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
+import axios from '../../api/baseURL';
 
 export const getAllPlaces = createAsyncThunk(
   'places/getAllPlaces',
@@ -25,10 +26,12 @@ export const getPlaceById = createAsyncThunk(
 );
 export const createPlace = createAsyncThunk(
   'places/createPlaces',
-  async (user, thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
-      const response = await axios.post('/places', user);
+      const response = await axios.post('/places', data)
+      toast.success('New place added to your list')
       return response.data;
+
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.status);
     }
@@ -36,9 +39,9 @@ export const createPlace = createAsyncThunk(
 );
 export const updatePlaces = createAsyncThunk(
   'places/updatePlaces',
-  async (user, thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
-      const response = await axios.put(`/places/${user._id}`, user);
+      const response = await axios.put(`/places/${data.id}`, data.formData);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.status);

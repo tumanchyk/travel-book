@@ -7,7 +7,7 @@ const Textarea = ({ label, id, value, handleChange }) => {
             value={value}
             onChange={handleChange}
             multiline
-            maxRows={4}
+            maxRows={5}
             variant="standard"
             fullWidth
             sx={{

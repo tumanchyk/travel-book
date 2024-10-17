@@ -1,12 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 import { getAllPlaces, getPlaceById } from './placesOperations';
 
 const placesSlice = createSlice({
   name: 'places',
   initialState: {
     list: [],
-    selectedPlace: {_id: null, country: "", places: "", date: "", overview: "", isVisited: false},
+    selectedPlace: {_id: null, country: "", places: "", date: "", overview: "", isVisited: false, image: ""},
     type: "all"
   },
   reducers: {

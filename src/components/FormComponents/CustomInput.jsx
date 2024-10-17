@@ -28,7 +28,7 @@ const CustomInput = ({label, id, handleChange, type, value, error, required}) =>
         }
       }}
     />
-    <FormHelperText>{error}</FormHelperText>
+    <FormHelperText sx={{ color: 'red' }}>{error}</FormHelperText>
 
   </FormControl>
 }

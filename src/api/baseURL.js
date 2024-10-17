@@ -1,7 +1,7 @@
 import axios from "axios";
 import { store } from "../store/store";
 
-const axiosBaseUrl = "https://user-notes-backend.vercel.app";
+const axiosBaseUrl = process.env.REACT_APP_BACKEND_URL;
 axios.defaults.baseURL = axiosBaseUrl; 
 
 axios.interceptors.request.use(

@@ -6,68 +6,72 @@ import FormBtn from '../FormComponents/FormButton';
 import { registerUser } from '../../store/auth/authOperations';
 import { Form } from "../FormComponents/AuthForm.styled";
 import { AccountLink } from '../FormComponents/AccountLink.styled';
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const RegisterForm = () => {
-  const [user, setUser] = useState({ email: "", password: "", name: "" });
-  const [errors, setErrors] = useState({ email: "", password: "", name: "" });
-  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+   const dispatch = useDispatch();
   const navigate = useNavigate();
+   const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      name: ""
+    },
+    validationSchema: Yup.object().shape({
+      password: Yup.string().required("Password is required"),
+      name: Yup.string().required("Name is required"),
+      email: Yup.string()
+        .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email")
+        .required("Email is required"),
+    }),
+     onSubmit: (values) => {
+      console.log(values)
+      try {
+        setLoading(true);
+        dispatch(registerUser(values));
+        navigate('/login');
+        setLoading(false);
+      } catch (err) {
+        setLoading(false);
+      }
+    },
+   });
   
-  const handleChange = e => {
-      const { id, value } = e.currentTarget;
-      setUser(prevUser => ({
-      ...prevUser,
-      [id]: value,
-      }));
-  };
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!user.email || !user.password || !user.name) {
-      setErrors({
-        name: !user.name ? "Name is required" : "",
-        email: !user.email ? "Email is required" : "",
-        password: !user.password ? "Password is required" : "",
-      });
-    } else {
-      dispatch(registerUser(user));
-      setUser({ email: "", password: "", name: "" });
-      navigate('/login');  
-    }
-  };
+ 
     
-    return <Form autoComplete="off" onSubmit={handleSubmit}>
-      <h1>Register</h1>
+    return <Form autoComplete="off" onSubmit={formik.handleSubmit}>
+          <h1>Register</h1>
           <CustomInput
-            label="Name"
+            label="Name *"
             id="name"
-            value={user.name}
-            handleChange={handleChange}
-            error={errors.name}
-            type="name"
+            value={formik.values.name}
+            handleChange={formik.handleChange}
+            error={formik.errors.name}
+            type="text"
             required={true}
           />
           <CustomInput
-            label="Email"
+            label="Email *"
             id="email"
-            value={user.email}
-            handleChange={handleChange}
-            error={errors.email}
+            value={formik.values.email}
+            handleChange={formik.handleChange}
+            error={formik.errors.email}
             type="email"
             required={true}
           />
           <CustomInput
-            label="Password"
+            label="Password *"
             id="password"
-            value={user.password}
-            handleChange={handleChange}
-            error={errors.password}
+            value={formik.values.password}
+            handleChange={formik.handleChange}
+            error={formik.errors.password}
             type="password"
             required={true}
           />
 
-          <FormBtn name="Register" type="submit" />
+          <FormBtn name="Register" type="submit" disabled={loading}/>
           <AccountLink to="/login">Already have an account?</AccountLink>
         </Form>
 }

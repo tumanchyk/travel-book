@@ -8,9 +8,8 @@ export const Button = styled(Link)`
     padding: 18px 27px;
     font-size: 14px;
     text-decoration: none;
-    margin-left: auto;
     color: #202020;
-    border: 1px solid #202020;
+    border: 1px solid #000000;
     background: transparent;
     cursor: pointer;
     text-transform: uppercase;
