@@ -27,7 +27,7 @@
 - Install all dependencies with the command:
 
 ```jsx
-yarn;
+yarn
 ```
 
 ### Starting the Development Server
