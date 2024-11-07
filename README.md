@@ -9,7 +9,7 @@
 - **[MUI](https://mui.com/)**
 - **[Emotion](https://emotion.sh/docs/introduction)**
 - **[Axios](https://axios-http.com/docs/intro)**
-- **[Redux Toolkit](https://redux-toolkit.js.org/)**
+- **[TanStack Query](https://tanstack.com/query/latest)**
 
 ### Backend
 
